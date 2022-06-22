@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+
+<!-- stylesheet: https://codepen.io/colorlib/pen/KVoZyv -->
+
+
+<body>
+  <div class="container">
+    <form id="contact" onsubmit="return postToGoogle();">
+      <h3>Contact Form</h3>
+      <h4>Connect with us</h4>
+      <fieldset>
+        <input  placeholder="Your name"
+                type="text" 
+                name="entry.1094381503" 
+                data-name="Name" 
+                id="Name" 
+                required>
+      </fieldset>
+      <fieldset>
+        <input 
+                placeholder="Your Email Address" 
+                type="email" 
+                name="entry.638252421" 
+                data-name="Email" 
+                id="Email" 
+                required>
+      </fieldset>
+      <fieldset>
+        <input 
+                placeholder="Your Phone Number" 
+                type="tel" 
+                name="entry.2123284907" 
+                data-name="Phone" 
+                id="Phone" 
+                required>
+      </fieldset>
+      <fieldset>
+        <textarea 
+                placeholder="Type your message here...." 
+                data-name="Message" 
+                id="Message" 
+                name="entry.1908904739" 
+                required>
+        </textarea>
+      </fieldset>
+      <fieldset>
+        <button type="submit" id="contact-submit">Submit</button>
+      </fieldset>
+    </form>
+  </div>
+
+  <script>
+    function postToGoogle() {
+      var field1 = $("#Name").val();
+      var field2 = $("#Email").val();
+      var field3 = $("#Phone").val();
+      var field4 = $("#Message").val();
+
+      $.ajax({
+        url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdkjo8D7ZunpircoNazJK5tGJ8X6RMDNCmnIUnVtdc7Bwjtrg/formResponse",
+        data: {
+          "entry.1094381503": field1,
+          "entry.638252421": field2,
+          "entry.2123284907": field3,
+          "entry.1908904739": field4
+        },
+        type: "POST",
+        dataType: "xml",
+        success: function (d) {
+          $('#contact').trigger('reset');
+        },
+        error: function (x, y, z) {
+          $('#contact').trigger('reset');
+        }
+      });
+      return false;
+    }
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</body>
+
+</html>
